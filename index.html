@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STUDENT360 - Smart Student Academic & Career Management Dashboard</title>
+  <meta name="description" content="All-in-one academic and career management platform for college students. Manage classes, assignments, exams, attendance, study planner, internships, and career roadmap.">
+  
+  <!-- Modern Typography (Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- ====================================================================
+         Sidebar Navigation
+         ==================================================================== -->
+    <aside class="app-sidebar" id="appSidebar">
+      <!-- Sidebar Header -->
+      <div class="sidebar-header">
+        <a href="#dashboard" class="brand-logo" onclick="navigateTo('dashboard'); return false;">
+          <div class="brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+          </div>
+          <div class="brand-text">STUDENT<span>360</span></div>
+          <span class="brand-badge">SaaS</span>
+        </a>
+        <button class="sidebar-close-btn" id="closeSidebarBtn" aria-label="Close Sidebar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Navigation Content -->
+      <div class="sidebar-content">
+        <!-- Main Group -->
+        <div class="nav-group">
+          <div class="nav-group-title">Overview</div>
+          <ul class="nav-list">
+            <li>
+              <a class="nav-link active" data-page="dashboard" onclick="navigateTo('dashboard')">
+                <span class="nav-link-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                  </svg>
+                  <span>Dashboard</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Academics Accordion -->
+        <div class="nav-group">
+          <div class="nav-group-title">Academics</div>
+          <ul class="nav-list">
+            <li class="nav-item-expandable open" id="navAcademicsGroup">
+              <div class="nav-link" onclick="toggleNavGroup('navAcademicsGroup')">
+                <span class="nav-link-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                  </svg>
+                  <span>Academics</span>
+                </span>
+                <svg class="nav-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+              <ul class="nav-sublist">
+                <li>
+                  <a class="nav-sublink" data-page="homework" onclick="navigateTo('homework')">
+                    <span>Homework</span>
+                    <span class="badge badge-warning" id="sidebarHwCount">4</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-sublink" data-page="classwork" onclick="navigateTo('classwork')">
+                    <span>Classwork</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-sublink" data-page="assignments" onclick="navigateTo('assignments')">
+                    <span>Assignments</span>
+                    <span class="badge badge-danger" id="sidebarAssignCount">3</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-sublink" data-page="deadlines" onclick="navigateTo('deadlines')">
+                    <span>Smart Deadlines</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-sublink" data-page="exams" onclick="navigateTo('exams')">
+                    <span>Exams</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-sublink" data-page="timetable" onclick="navigateTo('timetable')">
+                    <span>Timetable</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-sublink" data-page="attendance" onclick="navigateTo('attendance')">
+                    <span>Attendance</span>
+                    <span class="badge badge-primary" id="sidebarAttendPct">87%</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a class="nav-link" data-page="study" onclick="navigateTo('study')">
+                <span class="nav-link-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  <span>Study Planner</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" data-page="reminders" onclick="navigateTo('reminders')">
+                <span class="nav-link-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                  </svg>
+                  <span>Reminders</span>
+                </span>
+                <span class="badge badge-neutral" id="sidebarReminderCount">3</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Career Accordion -->
+        <div class="nav-group">
+          <div class="nav-group-title">Career & Growth</div>
+          <ul class="nav-list">
+            <li class="nav-item-expandable open" id="navCareerGroup">
+              <div class="nav-link" onclick="toggleNavGroup('navCareerGroup')">
+                <span class="nav-link-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                  <span>Career</span>
+                </span>
+                <svg class="nav-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+              <ul class="nav-sublist">
+                <li>
+                  <a class="nav-sublink" data-page="internships" onclick="navigateTo('internships')">
+                    <span>Internships</span>
+                    <span class="badge badge-primary">16</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-sublink" data-page="applications" onclick="navigateTo('applications')">
+                    <span>Applications</span>
+                    <span class="badge badge-success" id="sidebarAppCount">12</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-sublink" data-page="skills" onclick="navigateTo('skills')">
+                    <span>Skills</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-sublink" data-page="resume" onclick="navigateTo('resume')">
+                    <span>Resume Builder</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-sublink" data-page="roadmap" onclick="navigateTo('roadmap')">
+                    <span>Career Roadmap</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-sublink" data-page="assistant" onclick="navigateTo('assistant')">
+                    <span>Career Assistant</span>
+                    <span class="badge badge-info">Smart</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a class="nav-link" data-page="analytics" onclick="navigateTo('analytics')">
+                <span class="nav-link-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                  </svg>
+                  <span>Analytics</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- System Settings & Profile -->
+        <div class="nav-group">
+          <div class="nav-group-title">Preferences</div>
+          <ul class="nav-list">
+            <li>
+              <a class="nav-link" data-page="profile" onclick="navigateTo('profile')">
+                <span class="nav-link-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  <span>Profile</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" data-page="settings" onclick="navigateTo('settings')">
+                <span class="nav-link-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                  </svg>
+                  <span>Settings</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div class="user-mini-card" onclick="navigateTo('profile')">
+          <div class="user-avatar" id="sidebarAvatar">RB</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebarStudentName">Rohith B</div>
+            <div class="user-role" id="sidebarStudentDept">B.Tech CSE • 3rd Year</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ====================================================================
+         Main Container
+         ==================================================================== -->
+    <div class="app-main">
+      
+      <!-- Top Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Navigation">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+
+          <!-- Global Search trigger -->
+          <div class="global-search-bar" onclick="openGlobalSearch()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" class="global-search-input" placeholder="Search tasks, classes, exams, internships..." readonly>
+            <span class="search-shortcut">Ctrl+K</span>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Notification Bell -->
+          <div style="position: relative;">
+            <button class="header-icon-btn" id="notifBellBtn" onclick="toggleNotifDropdown()" title="Notifications">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+              <span class="notif-badge" id="notifBadge">3</span>
+            </button>
+
+            <!-- Notifications Dropdown -->
+            <div class="notif-dropdown" id="notifDropdown">
+              <div class="notif-header">
+                <h4>Notifications</h4>
+                <button class="notif-clear-btn" onclick="clearAllNotifications()">Clear All</button>
+              </div>
+              <div class="notif-list" id="notifListContainer">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Add Button -->
+          <button class="quick-add-btn" onclick="openQuickAddModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>+ Add</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- App Content Views -->
+      <main class="app-content">
+
+        <!-- ================================================================
+             VIEW 1: DASHBOARD
+             ================================================================ -->
+        <section class="page-view active" id="page-dashboard">
+          <!-- Greeting Banner -->
+          <div class="greeting-banner">
+            <div class="greeting-content">
+              <h2 id="dashGreeting">Good Morning, Rohith 👋</h2>
+              <p>Here's your comprehensive student overview for today. Stay on track and finish strong!</p>
+            </div>
+            <div class="greeting-meta">
+              <div class="greeting-meta-item">
+                <div class="greeting-meta-label">Semester CGPA</div>
+                <div class="greeting-meta-value" id="dashCgpa">8.92</div>
+              </div>
+              <div class="greeting-meta-item">
+                <div class="greeting-meta-label">Overall Attendance</div>
+                <div class="greeting-meta-value" id="dashOverallAttendance">87%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary Cards Grid -->
+          <div class="summary-grid">
+            <div class="summary-card" onclick="navigateTo('homework')">
+              <div class="summary-card-header">
+                <span class="summary-title">Homework</span>
+                <div class="summary-icon warning">📚</div>
+              </div>
+              <div class="summary-value" id="dashHwPending">4 Pending</div>
+              <div class="summary-subtext">1 Due Today</div>
+            </div>
+
+            <div class="summary-card" onclick="navigateTo('assignments')">
+              <div class="summary-card-header">
+                <span class="summary-title">Assignments</span>
+                <div class="summary-icon danger">📝</div>
+              </div>
+              <div class="summary-value" id="dashAssignDue">3 Due Soon</div>
+              <div class="summary-subtext">Earliest: DBMS Lab</div>
+            </div>
+
+            <div class="summary-card" onclick="navigateTo('timetable')">
+              <div class="summary-card-header">
+                <span class="summary-title">Classes Today</span>
+                <div class="summary-icon blue">🏫</div>
+              </div>
+              <div class="summary-value" id="dashClassesCount">5 Classes</div>
+              <div class="summary-subtext">Next: 10:00 AM Web Tech</div>
+            </div>
+
+            <div class="summary-card" onclick="navigateTo('attendance')">
+              <div class="summary-card-header">
+                <span class="summary-title">Attendance</span>
+                <div class="summary-icon success">📊</div>
+              </div>
+              <div class="summary-value" id="dashAttendancePct">87%</div>
+              <div class="summary-subtext">1 subject needs attention</div>
+            </div>
+
+            <div class="summary-card" onclick="navigateTo('internships')">
+              <div class="summary-card-header">
+                <span class="summary-title">Internships</span>
+                <div class="summary-icon purple">💼</div>
+              </div>
+              <div class="summary-value" id="dashSavedInternships">8 Saved</div>
+              <div class="summary-subtext">16 Available to apply</div>
+            </div>
+
+            <div class="summary-card" onclick="navigateTo('applications')">
+              <div class="summary-card-header">
+                <span class="summary-title">Applications</span>
+                <div class="summary-icon info">🎯</div>
+              </div>
+              <div class="summary-value" id="dashActiveApps">12 Active</div>
+              <div class="summary-subtext">2 Interviews lined up</div>
+            </div>
+          </div>
+
+          <!-- Dashboard 2-Column Grid -->
+          <div class="dashboard-grid">
+            <!-- Left Column: Today's Timeline -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    Today's Schedule & Timeline
+                  </h3>
+                  <div class="card-subtitle" id="dashTodayDate">Friday, October 2, 2026</div>
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="navigateTo('timetable')">View Timetable</button>
+              </div>
+
+              <div class="timeline" id="dashTimeline">
+                <!-- Timeline items injected via JS -->
+              </div>
+            </div>
+
+            <!-- Right Column: Urgent Deadlines & Study Mini Widget -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+              <!-- Urgent Deadlines Mini -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">⚠️ Priority Deadlines</h3>
+                  <button class="btn btn-secondary btn-sm" onclick="navigateTo('deadlines')">All</button>
+                </div>
+                <div class="deadline-list" id="dashDeadlinesMini">
+                  <!-- Injected via JS -->
+                </div>
+              </div>
+
+              <!-- Quick Study Goal -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">🎯 Today's Study Goals</h3>
+                  <button class="btn btn-secondary btn-sm" onclick="navigateTo('study')">Planner</button>
+                </div>
+                <div id="dashStudyMini" style="display: flex; flex-direction: column; gap: 0.65rem;">
+                  <!-- Injected via JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 2: HOMEWORK MANAGER
+             ================================================================ -->
+        <section class="page-view" id="page-homework">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>📚 Homework Manager</h1>
+              <p>Keep track of all daily homework tasks, estimated completion times, and priorities.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" onclick="openAddModal('homework')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Add Homework
+              </button>
+            </div>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="toolbar">
+            <div class="toolbar-search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="hwSearchInput" placeholder="Search homework..." oninput="renderHomework()">
+            </div>
+            <div class="toolbar-filters">
+              <select class="filter-select" id="hwSubjectFilter" onchange="renderHomework()">
+                <option value="">All Subjects</option>
+              </select>
+              <select class="filter-select" id="hwPriorityFilter" onchange="renderHomework()">
+                <option value="">All Priorities</option>
+                <option value="High">High Priority</option>
+                <option value="Medium">Medium Priority</option>
+                <option value="Low">Low Priority</option>
+              </select>
+              <select class="filter-select" id="hwStatusFilter" onchange="renderHomework()">
+                <option value="">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+              <select class="filter-select" id="hwSortFilter" onchange="renderHomework()">
+                <option value="deadline">Sort by Deadline</option>
+                <option value="priority">Sort by Priority</option>
+                <option value="subject">Sort by Subject</option>
+              </select>
+            </div>
+            <div class="filter-pills" id="hwStatsPills">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Homework Grid -->
+          <div class="task-grid" id="homeworkGrid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 3: CLASSWORK MANAGER
+             ================================================================ -->
+        <section class="page-view" id="page-classwork">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>📖 Classwork & Lecture Notes</h1>
+              <p>Record notes, topics, faculty details, and completion for every class session.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" onclick="openAddModal('classwork')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Add Classwork
+              </button>
+            </div>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="toolbar">
+            <div class="toolbar-search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="cwSearchInput" placeholder="Search topics or notes..." oninput="renderClasswork()">
+            </div>
+            <div class="toolbar-filters">
+              <select class="filter-select" id="cwSubjectFilter" onchange="renderClasswork()">
+                <option value="">All Subjects</option>
+              </select>
+              <select class="filter-select" id="cwStatusFilter" onchange="renderClasswork()">
+                <option value="">All Statuses</option>
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending Review</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="classwork-grid" id="classworkGrid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 4: ASSIGNMENT MANAGER
+             ================================================================ -->
+        <section class="page-view" id="page-assignments">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>📝 Assignment Manager</h1>
+              <p>Track project submissions, deadlines, and live countdowns.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" onclick="openAddModal('assignments')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Add Assignment
+              </button>
+            </div>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="toolbar">
+            <div class="toolbar-search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="assignSearchInput" placeholder="Search assignments..." oninput="renderAssignments()">
+            </div>
+            <div class="toolbar-filters">
+              <select class="filter-select" id="assignSubjectFilter" onchange="renderAssignments()">
+                <option value="">All Subjects</option>
+              </select>
+              <select class="filter-select" id="assignStatusFilter" onchange="renderAssignments()">
+                <option value="">All Statuses</option>
+                <option value="Not Started">Not Started</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Submitted">Submitted</option>
+                <option value="Late">Late</option>
+              </select>
+            </div>
+            <div class="filter-pills" id="assignStatsPills">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <div class="task-grid" id="assignmentGrid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 5: SMART DEADLINE SYSTEM
+             ================================================================ -->
+        <section class="page-view" id="page-deadlines">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>⏱️ Smart Deadline System</h1>
+              <p>Consolidated urgency radar across Homework, Assignments, Exams, and Internship applications.</p>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="toolbar-filters">
+              <button class="btn btn-secondary btn-sm active-filter" onclick="filterDeadlines('all', this)">All Deadlines</button>
+              <button class="btn btn-secondary btn-sm" onclick="filterDeadlines('homework', this)">Homework</button>
+              <button class="btn btn-secondary btn-sm" onclick="filterDeadlines('assignment', this)">Assignments</button>
+              <button class="btn btn-secondary btn-sm" onclick="filterDeadlines('exam', this)">Exams</button>
+              <button class="btn btn-secondary btn-sm" onclick="filterDeadlines('internship', this)">Internships</button>
+            </div>
+          </div>
+
+          <div class="deadline-list" id="allDeadlinesContainer">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 6: EXAM PLANNER
+             ================================================================ -->
+        <section class="page-view" id="page-exams">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>🎓 Exam Planner</h1>
+              <p>Schedule midterms, finals, syllabus coverage, and revision countdowns.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" onclick="openAddModal('exams')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Add Exam
+              </button>
+            </div>
+          </div>
+
+          <div class="exam-grid" id="examGrid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 7: TIMETABLE
+             ================================================================ -->
+        <section class="page-view" id="page-timetable">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>📅 Weekly Timetable</h1>
+              <p>Organize weekly lectures, lab sessions, tutorials, and faculty rooms.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" onclick="openAddModal('timetable')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Add Class Slot
+              </button>
+            </div>
+          </div>
+
+          <div class="timetable-toolbar">
+            <div class="day-tabs" id="timetableDayTabs">
+              <button class="day-tab active" onclick="switchTimetableDay('All', this)">All Week</button>
+              <button class="day-tab" onclick="switchTimetableDay('Monday', this)">Mon</button>
+              <button class="day-tab" onclick="switchTimetableDay('Tuesday', this)">Tue</button>
+              <button class="day-tab" onclick="switchTimetableDay('Wednesday', this)">Wed</button>
+              <button class="day-tab" onclick="switchTimetableDay('Thursday', this)">Thu</button>
+              <button class="day-tab" onclick="switchTimetableDay('Friday', this)">Fri</button>
+              <button class="day-tab" onclick="switchTimetableDay('Saturday', this)">Sat</button>
+            </div>
+          </div>
+
+          <div class="timetable-grid" id="timetableGrid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 8: ATTENDANCE TRACKER
+             ================================================================ -->
+        <section class="page-view" id="page-attendance">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>📊 Attendance Tracker</h1>
+              <p>Monitor class attendance, 75% eligibility warning criteria, and safe bunk calculations.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" onclick="openAddModal('attendance')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Add Subject
+              </button>
+            </div>
+          </div>
+
+          <div class="attendance-grid" id="attendanceGrid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 9: STUDY PLANNER
+             ================================================================ -->
+        <section class="page-view" id="page-study">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>🎯 Daily Study Planner</h1>
+              <p>Plan revision sessions, track study hours, and build daily consistency.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" onclick="openAddModal('studyTasks')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Add Study Task
+              </button>
+            </div>
+          </div>
+
+          <div class="study-planner-container">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Today's Study Checklist</h3>
+                <span class="badge badge-primary" id="studyTodayDateText">October 2</span>
+              </div>
+              <div id="studyTaskList">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Study Stats Sidebar -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Study Statistics</h3>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">
+                      <span>Weekly Goal Progress</span>
+                      <span id="studyWeeklyHoursText">12 / 16 Hours</span>
+                    </div>
+                    <div class="progress-track">
+                      <div class="progress-fill" id="studyGoalFill" style="width: 75%;"></div>
+                    </div>
+                  </div>
+                  <div style="background: var(--bg-muted); padding: 1rem; border-radius: var(--radius-md);">
+                    <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Average Daily Focus</div>
+                    <div style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-top: 0.2rem;">2.4 Hours</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 10: INTERNSHIP FINDER
+             ================================================================ -->
+        <section class="page-view" id="page-internships">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>💼 Internship Discovery</h1>
+              <p>Explore curated opportunities for tech, data, design, and software roles.</p>
+            </div>
+          </div>
+
+          <!-- Sample Data Disclaimer Banner -->
+          <div class="internship-banner">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <span><strong>Notice:</strong> Internship listings shown below are realistic demo sample data created for student workflow demonstrations.</span>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="toolbar">
+            <div class="toolbar-search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="internSearchInput" placeholder="Search role, company or skill..." oninput="renderInternships()">
+            </div>
+            <div class="toolbar-filters">
+              <select class="filter-select" id="internModeFilter" onchange="renderInternships()">
+                <option value="">All Work Modes</option>
+                <option value="Remote">Remote</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="Onsite">Onsite</option>
+              </select>
+              <select class="filter-select" id="internSavedFilter" onchange="renderInternships()">
+                <option value="all">All Listings (16)</option>
+                <option value="saved">Saved Only</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="internship-grid" id="internshipGrid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 11: JOB APPLICATION TRACKER (KANBAN)
+             ================================================================ -->
+        <section class="page-view" id="page-applications">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>🎯 Job Application Tracker</h1>
+              <p>Visual Kanban board tracking candidate recruitment stages.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" onclick="openAddModal('applications')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Add Application
+              </button>
+            </div>
+          </div>
+
+          <div class="kanban-board" id="kanbanBoard">
+            <!-- Columns: Applied, Screening, Interview, Selected, Rejected -->
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 12: SKILL TRACKER
+             ================================================================ -->
+        <section class="page-view" id="page-skills">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>⚡ Skill Tracker & Matrix</h1>
+              <p>Assess and rate your proficiency across technical, database, and soft skills.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" onclick="openAddModal('skills')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Add Skill
+              </button>
+            </div>
+          </div>
+
+          <div class="skills-container" id="skillsContainer">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 13: CAREER ROADMAP
+             ================================================================ -->
+        <section class="page-view" id="page-roadmap">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>🗺️ Career Roadmap</h1>
+              <p>Step-by-step career path guides with milestone progress tracking.</p>
+            </div>
+          </div>
+
+          <div class="roadmap-tabs" id="roadmapTrackTabs">
+            <!-- Injected via JS -->
+          </div>
+
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <div>
+                <h3 class="card-title" id="roadmapTitle">Java Full Stack Developer</h3>
+                <div class="card-subtitle" id="roadmapDesc">Comprehensive roadmap from Core Java to Enterprise Full Stack</div>
+              </div>
+              <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="roadmapPct">55%</div>
+            </div>
+            <div class="progress-track" style="height: 10px;">
+              <div class="progress-fill" id="roadmapProgressFill" style="width: 55%;"></div>
+            </div>
+          </div>
+
+          <div class="roadmap-milestones" id="roadmapMilestonesContainer">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 14: RESUME BUILDER
+             ================================================================ -->
+        <section class="page-view" id="page-resume">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>📄 Live Resume Builder</h1>
+              <p>Craft your professional ATS-friendly resume and export directly to PDF.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" onclick="printResume()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                Print / Save as PDF
+              </button>
+            </div>
+          </div>
+
+          <div class="resume-layout">
+            <!-- Left: Forms Accordion -->
+            <div class="resume-form-container">
+              <!-- Personal Info -->
+              <div class="resume-accordion-item">
+                <div class="resume-accordion-header" onclick="toggleResumeSection(this)">
+                  <span>👤 Personal Information</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="resume-accordion-body">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Full Name</label>
+                      <input type="text" class="form-control" id="resName" oninput="updateResumeLive()">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Professional Title</label>
+                      <input type="text" class="form-control" id="resTitle" oninput="updateResumeLive()">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Email</label>
+                      <input type="email" class="form-control" id="resEmail" oninput="updateResumeLive()">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Phone</label>
+                      <input type="text" class="form-control" id="resPhone" oninput="updateResumeLive()">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Location / City</label>
+                      <input type="text" class="form-control" id="resLocation" oninput="updateResumeLive()">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">LinkedIn / GitHub</label>
+                      <input type="text" class="form-control" id="resLinks" oninput="updateResumeLive()">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Career Objective</label>
+                    <textarea class="form-control" id="resObjective" oninput="updateResumeLive()"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Education -->
+              <div class="resume-accordion-item">
+                <div class="resume-accordion-header" onclick="toggleResumeSection(this)">
+                  <span>🎓 Education</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="resume-accordion-body">
+                  <div class="form-group">
+                    <label class="form-label">College / University</label>
+                    <input type="text" class="form-control" id="resCollege" oninput="updateResumeLive()">
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Degree & Branch</label>
+                      <input type="text" class="form-control" id="resDegree" oninput="updateResumeLive()">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Year & CGPA</label>
+                      <input type="text" class="form-control" id="resEduYear" oninput="updateResumeLive()">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Projects & Experience -->
+              <div class="resume-accordion-item">
+                <div class="resume-accordion-header" onclick="toggleResumeSection(this)">
+                  <span>💻 Technical Projects</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="resume-accordion-body">
+                  <div class="form-group">
+                    <label class="form-label">Projects (One per paragraph)</label>
+                    <textarea class="form-control" id="resProjects" rows="4" oninput="updateResumeLive()"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Skills & Certifications -->
+              <div class="resume-accordion-item">
+                <div class="resume-accordion-header" onclick="toggleResumeSection(this)">
+                  <span>🏆 Skills, Certifications & Achievements</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="resume-accordion-body">
+                  <div class="form-group">
+                    <label class="form-label">Core Skills (Comma separated)</label>
+                    <input type="text" class="form-control" id="resSkills" oninput="updateResumeLive()">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Certifications & Achievements</label>
+                    <textarea class="form-control" id="resCerts" rows="3" oninput="updateResumeLive()"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Printable Resume Paper Live Preview -->
+            <div class="resume-preview-wrapper">
+              <div class="resume-paper" id="resumePrintArea">
+                <div id="previewHeader" style="border-bottom: 2px solid var(--primary); padding-bottom: 0.75rem; margin-bottom: 1rem;">
+                  <h2 id="prevName" style="margin: 0; font-size: 1.6rem; color: #0f172a;">Rohith B</h2>
+                  <div id="prevTitle" style="font-weight: 600; color: #2563eb; margin: 0.2rem 0;">Computer Science Engineering Student</div>
+                  <div id="prevContact" style="font-size: 0.8rem; color: #475569;">
+                    rohith.b@student360.edu • +91 98765 43210 • Bengaluru, India • github.com/rohithb • linkedin.com/in/rohithb
+                  </div>
+                </div>
+
+                <div class="resume-section-title">Career Objective</div>
+                <p id="prevObjective" style="font-size: 0.85rem; color: #334155; line-height: 1.45;">
+                  Passionate and detail-oriented Computer Science undergraduate seeking software engineering internships. Proficient in Java, Full Stack Development, Data Structures, and Database Management.
+                </p>
+
+                <div class="resume-section-title">Education</div>
+                <div id="prevEducation" style="font-size: 0.85rem;">
+                  <div style="display: flex; justify-content: space-between; font-weight: 600;">
+                    <span id="prevCollege">National Institute of Technology</span>
+                    <span id="prevEduYear">2023 – 2027</span>
+                  </div>
+                  <div style="color: #475569;" id="prevDegree">B.Tech in Computer Science & Engineering • CGPA: 8.92</div>
+                </div>
+
+                <div class="resume-section-title">Technical Projects</div>
+                <div id="prevProjects" style="font-size: 0.84rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                  <!-- Injected via JS -->
+                </div>
+
+                <div class="resume-section-title">Technical Skills</div>
+                <p id="prevSkills" style="font-size: 0.84rem; color: #334155;">
+                  <strong>Languages:</strong> Java, Python, C++, SQL, JavaScript<br>
+                  <strong>Web Technologies:</strong> HTML5, CSS3, React, Node.js, REST APIs<br>
+                  <strong>Tools:</strong> Git, GitHub, Docker, VS Code, Linux
+                </p>
+
+                <div class="resume-section-title">Certifications & Achievements</div>
+                <div id="prevCerts" style="font-size: 0.84rem; color: #334155;">
+                  • Oracle Certified Associate: Java SE Programmer<br>
+                  • Finalist in Smart India Hackathon 2025<br>
+                  • Solved 350+ LeetCode DSA Problems
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 15: CAREER ASSISTANT (RULE-BASED CHAT)
+             ================================================================ -->
+        <section class="page-view" id="page-assistant">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>💬 Career Assistant</h1>
+              <p>Rule-based career guidance, interview tips, project ideas, and resume recommendations.</p>
+            </div>
+          </div>
+
+          <div class="chat-container">
+            <div class="chat-header">
+              <div class="assistant-avatar">🤖</div>
+              <div>
+                <h4 style="font-weight: 700; font-size: 1rem;">Student360 Career Assistant</h4>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Smart Rule-Based Career Mentor • Instant Answers</div>
+              </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+              <div class="chat-bubble bot">
+                Hello Rohith! 👋 I'm your Student360 Career Assistant. How can I help you accelerate your academic and career goals today? You can choose a common prompt below or type your question!
+              </div>
+            </div>
+
+            <div class="chat-suggestions" id="chatSuggestions">
+              <button class="suggestion-chip" onclick="sendSuggestedChat('How can I get an internship?')">How can I get an internship?</button>
+              <button class="suggestion-chip" onclick="sendSuggestedChat('What skills should I learn?')">What skills should I learn?</button>
+              <button class="suggestion-chip" onclick="sendSuggestedChat('How can I improve my resume?')">How can I improve my resume?</button>
+              <button class="suggestion-chip" onclick="sendSuggestedChat('How should I prepare for interviews?')">How should I prepare for interviews?</button>
+              <button class="suggestion-chip" onclick="sendSuggestedChat('What Java projects should I build?')">What Java projects should I build?</button>
+              <button class="suggestion-chip" onclick="sendSuggestedChat('How can I improve my coding skills?')">How can I improve my coding skills?</button>
+            </div>
+
+            <form class="chat-input-row" onsubmit="handleChatSubmit(event)">
+              <input type="text" class="form-control" id="chatInput" placeholder="Ask about internships, skills, resumes, interview prep..." autocomplete="off">
+              <button type="submit" class="btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                Send
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 16: REMINDER SYSTEM
+             ================================================================ -->
+        <section class="page-view" id="page-reminders">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>🔔 Browser & In-App Reminders</h1>
+              <p>Configure reminder alerts for upcoming exams, classes, deadlines, and interviews.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-outline" id="requestPermBtn" onclick="requestBrowserNotificationPermission()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                Enable Browser Notifications
+              </button>
+              <button class="btn btn-primary" onclick="openAddModal('reminders')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Add Reminder
+              </button>
+            </div>
+          </div>
+
+          <div class="task-grid" id="remindersGrid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 17: ANALYTICS
+             ================================================================ -->
+        <section class="page-view" id="page-analytics">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>📊 Academic & Career Analytics</h1>
+              <p>Visual progress indicators generated using pure SVG & CSS without external libraries.</p>
+            </div>
+          </div>
+
+          <div class="analytics-grid">
+            <!-- Academic Chart 1: Homework Completion Donut -->
+            <div class="chart-card">
+              <h3 class="card-title">📚 Homework Completion Rate</h3>
+              <div class="card-subtitle">Completed vs In Progress vs Pending</div>
+              <div class="chart-container" id="hwChartContainer">
+                <!-- SVG Donut rendered by script.js -->
+              </div>
+            </div>
+
+            <!-- Academic Chart 2: Attendance by Subject Bar Chart -->
+            <div class="chart-card">
+              <h3 class="card-title">🏫 Attendance by Subject (%)</h3>
+              <div class="card-subtitle">Benchmark threshold: 75%</div>
+              <div class="chart-container" id="attendanceBarChartContainer">
+                <!-- Pure HTML/CSS bar chart rendered by script.js -->
+              </div>
+            </div>
+
+            <!-- Career Chart 1: Application Pipeline Funnel -->
+            <div class="chart-card">
+              <h3 class="card-title">💼 Application Pipeline Funnel</h3>
+              <div class="card-subtitle">Active conversion through recruitment stages</div>
+              <div class="chart-container" id="appFunnelChartContainer">
+                <!-- Funnel rendered by script.js -->
+              </div>
+            </div>
+
+            <!-- Career Chart 2: Skill Readiness Gauge -->
+            <div class="chart-card">
+              <h3 class="card-title">⚡ Career Skill Readiness</h3>
+              <div class="card-subtitle">Overall technical competency rating</div>
+              <div class="chart-container" id="skillGaugeContainer">
+                <!-- Gauge rendered by script.js -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 18: PROFILE
+             ================================================================ -->
+        <section class="page-view" id="page-profile">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>👤 Student Profile</h1>
+              <p>Manage your academic credentials, social links, and contact information.</p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom: 2rem;">
+            <div class="profile-card-top">
+              <div class="profile-avatar-large" id="profileAvatarLarge">RB</div>
+              <div>
+                <h2 id="profHeaderName" style="font-size: 1.5rem; font-weight: 700;">Rohith B</h2>
+                <p id="profHeaderDept" style="color: var(--text-secondary);">B.Tech in Computer Science & Engineering</p>
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                  <span class="badge badge-primary">Semester 6</span>
+                  <span class="badge badge-success">CGPA 8.92</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Completion Progress Bar -->
+            <div class="profile-completion-box">
+              <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 0.4rem; font-size: 0.88rem;">
+                <span>Profile Completion</span>
+                <span id="profCompletionPct">82%</span>
+              </div>
+              <div class="progress-track" style="height: 10px;">
+                <div class="progress-fill" id="profCompletionFill" style="width: 82%;"></div>
+              </div>
+            </div>
+
+            <!-- Profile Form -->
+            <form id="profileForm" onsubmit="saveProfileForm(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Full Name <span class="req">*</span></label>
+                  <input type="text" class="form-control" id="formProfName" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email Address <span class="req">*</span></label>
+                  <input type="email" class="form-control" id="formProfEmail" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Phone Number</label>
+                  <input type="tel" class="form-control" id="formProfPhone">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">College / University</label>
+                  <input type="text" class="form-control" id="formProfCollege">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Degree</label>
+                  <input type="text" class="form-control" id="formProfDegree">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Department / Branch</label>
+                  <input type="text" class="form-control" id="formProfDept">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Academic Year</label>
+                  <input type="text" class="form-control" id="formProfYear">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">CGPA</label>
+                  <input type="number" step="0.01" class="form-control" id="formProfCgpa">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">GitHub URL</label>
+                  <input type="url" class="form-control" id="formProfGithub">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">LinkedIn URL</label>
+                  <input type="url" class="form-control" id="formProfLinkedin">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Portfolio URL</label>
+                  <input type="url" class="form-control" id="formProfPortfolio">
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+                <button type="submit" class="btn btn-primary">Save Profile</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 19: SETTINGS & DATA BACKUP
+             ================================================================ -->
+        <section class="page-view" id="page-settings">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>⚙️ Settings & Data Backup</h1>
+              <p>Manage application preferences, import/export your data, and storage controls.</p>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 800px;">
+            <!-- Privacy notice -->
+            <div class="card" style="border-left: 4px solid var(--primary);">
+              <h3 class="card-title">🔒 Privacy & Data Storage</h3>
+              <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 0.4rem;">
+                <strong>Your Student360 data is stored locally in this browser.</strong> No backend database is used, and no user data or passwords are transmitted across the internet.
+              </p>
+            </div>
+
+            <!-- Attendance Settings -->
+            <div class="card">
+              <h3 class="card-title">Attendance Warning Threshold</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                Set the minimum attendance threshold percentage before warnings trigger.
+              </p>
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <input type="range" id="settingThresholdSlider" min="60" max="90" value="75" oninput="updateAttendanceThreshold(this.value)">
+                <span style="font-size: 1.1rem; font-weight: 700; color: var(--primary);" id="settingThresholdVal">75%</span>
+              </div>
+            </div>
+
+            <!-- Export / Import -->
+            <div class="card">
+              <h3 class="card-title">Data Backup & Migration</h3>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+                Export all your courses, tasks, attendance records, applications, and resume as a portable JSON file.
+              </p>
+              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="exportDataJSON()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  Export My Data (JSON)
+                </button>
+                <label class="btn btn-secondary" style="margin: 0; cursor: pointer;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                  Import My Data
+                  <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importDataJSON(event)">
+                </label>
+              </div>
+            </div>
+
+            <!-- Reset / Clear -->
+            <div class="card" style="border-color: var(--danger-border); background: #fffcfc;">
+              <h3 class="card-title" style="color: var(--danger);">Danger Zone</h3>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+                Clear all custom entries or reload fresh demo data.
+              </p>
+              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <button class="btn btn-danger" onclick="confirmClearAllData()">
+                  Clear All Data
+                </button>
+                <button class="btn btn-secondary" onclick="confirmResetDemoData()">
+                  Reset to Demo Data
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       Mobile Bottom Navigation
+       ==================================================================== -->
+  <nav class="mobile-bottom-nav">
+    <a class="mobile-nav-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      <span>Dashboard</span>
+    </a>
+    <a class="mobile-nav-item" data-page="homework" onclick="navigateTo('homework')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+      <span>Academics</span>
+    </a>
+    <a class="mobile-nav-item" data-page="study" onclick="navigateTo('study')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      <span>Planner</span>
+    </a>
+    <a class="mobile-nav-item" data-page="internships" onclick="navigateTo('internships')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+      <span>Career</span>
+    </a>
+    <a class="mobile-nav-item" data-page="profile" onclick="navigateTo('profile')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- ====================================================================
+       Universal Add/Edit Form Modal
+       ==================================================================== -->
+  <div class="modal-backdrop" id="universalModalBackdrop" onclick="handleBackdropClick(event, 'universalModalBackdrop')">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add Item</h3>
+        <button class="modal-close-btn" onclick="closeModal('universalModalBackdrop')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <form id="universalModalForm" onsubmit="handleUniversalFormSubmit(event)">
+        <div class="modal-body" id="modalFormFields">
+          <!-- Dynamic form fields injected here -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('universalModalBackdrop')">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="modalSubmitBtn">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       Global Search Modal (Ctrl+K)
+       ==================================================================== -->
+  <div class="modal-backdrop" id="searchModalBackdrop" onclick="handleBackdropClick(event, 'searchModalBackdrop')">
+    <div class="modal search-modal">
+      <div class="search-modal-header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" class="search-modal-input" id="searchModalInput" placeholder="Search across homework, assignments, exams, internships..." oninput="handleGlobalSearch(this.value)">
+        <button class="modal-close-btn" onclick="closeModal('searchModalBackdrop')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="search-results" id="searchResultsContainer">
+        <!-- Results injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       Internship Details Modal
+       ==================================================================== -->
+  <div class="modal-backdrop" id="internshipDetailsModalBackdrop" onclick="handleBackdropClick(event, 'internshipDetailsModalBackdrop')">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="internDetailsRole">Role Title</h3>
+        <button class="modal-close-btn" onclick="closeModal('internshipDetailsModalBackdrop')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="internDetailsBody">
+        <!-- Injected via JS -->
+      </div>
+      <div class="modal-footer" id="internDetailsFooter">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       Confirmation Dialog Modal
+       ==================================================================== -->
+  <div class="modal-backdrop" id="confirmModalBackdrop">
+    <div class="modal" style="max-width: 420px;">
+      <div class="modal-header">
+        <h3 id="confirmModalTitle">Are you sure?</h3>
+      </div>
+      <div class="modal-body">
+        <p id="confirmModalMessage" style="font-size: 0.92rem; color: var(--text-secondary);">This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('confirmModalBackdrop')">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmModalActionBtn">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       Toast Notification System
+       ==================================================================== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
