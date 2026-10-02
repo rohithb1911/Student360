@@ -1,4 +1,3 @@
-# Student360
 # STUDENT360 🎓
 
 > **Smart Student Academic & Career Management Dashboard**  
