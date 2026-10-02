@@ -193,3 +193,21 @@ Built **strictly** with standard HTML5, CSS3, and modern Vanilla JavaScript, Stu
 
 ## 📁 Project Structure
 
+student360/
+├── index.html          # Semantic HTML5 shell with all module views and modals
+├── style.css           # Light-theme design system, tokens, layout, and print CSS
+├── script.js           # Core JS engine, data models, state store, and event handlers
+├── README.md           # Complete application documentation
+└── assets/
+    └── images/
+        └── logo.svg    # Scalable vector logo for Student360
+
+
+---
+
+## 💻 How to Run
+
+1. Clone or download the `student360` folder to your computer:
+   ```bash
+   git clone https://github.com/rohithb1911/Student360.git
+
