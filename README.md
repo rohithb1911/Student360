@@ -193,6 +193,7 @@ Built **strictly** with standard HTML5, CSS3, and modern Vanilla JavaScript, Stu
 
 ## 📁 Project Structure
 
+```text
 student360/
 ├── index.html          # Semantic HTML5 shell with all module views and modals
 ├── style.css           # Light-theme design system, tokens, layout, and print CSS
@@ -201,6 +202,7 @@ student360/
 └── assets/
     └── images/
         └── logo.svg    # Scalable vector logo for Student360
+```
 
 
 ---
